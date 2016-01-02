@@ -3,13 +3,13 @@ App.comments = App.cable.subscriptions.create "CommentsChannel",
 
   connected: ->
     # FIXME: While we wait for cable subscriptions to always be finalized before sending messages
+    console.log 'yo'
     setTimeout =>
       @followCurrentMessage()
       @installPageChangeCallback()
     , 1000
 
   received: (data) ->
-    alert(data)
     @collection().append(data.comment) unless @userIsCurrentUser(data.comment)
 
   userIsCurrentUser: (comment) ->
